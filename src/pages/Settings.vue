@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    Index
+    Settings
   </q-page>
 </template>
 

@@ -2,7 +2,7 @@
   "name": "awesome-groceries",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "Awesome Groceries",
   "author": "Alex Drozd <drozdster@gmail.com>",
   "private": true,
   "scripts": {
