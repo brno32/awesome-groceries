@@ -21,7 +21,7 @@
     </div>
 
     <q-dialog v-model="showAddGrocery">
-      <add-task></add-task>
+      <add-task @close="showAddGrocery = false"></add-task>
     </q-dialog>
   </q-page>
 </template>
@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   data () {
-    return { showAddGrocery: !false }
+    return { showAddGrocery: false }
   },
   computed: {
     ...mapGetters('groceries', ['groceries'])

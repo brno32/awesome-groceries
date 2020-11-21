@@ -1,19 +1,12 @@
 import Vue from 'vue'
+import { uid } from 'quasar'
 
 const state = {
   groceries: {
-    1: {
-      name: 'Apples',
-      completed: false
-    },
-    2: {
-      name: 'Oranges',
-      completed: false
-    },
-    3: {
-      name: 'Butter',
-      completed: false
-    }
+    // 1: {
+    //   name: 'Apples',
+    //   completed: false
+    // }
   }
 }
 
@@ -23,6 +16,9 @@ const mutations = {
   },
   deleteGrocery: (state, id) => {
     Vue.delete(state.groceries, id)
+  },
+  addGrocery: (state, payload) => {
+    Vue.set(state.groceries, payload.id, payload.grocery)
   }
 }
 
@@ -32,6 +28,14 @@ const actions = {
   },
   deleteGrocery: ({ commit }, id) => {
     commit('deleteGrocery', id)
+  },
+  addGrocery: ({ commit }, grocery) => {
+    const groceryId = uid()
+    const payload = {
+      id: groceryId,
+      grocery
+    }
+    commit('addGrocery', payload)
   }
 }
 
