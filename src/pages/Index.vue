@@ -13,9 +13,12 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label :class="{
-            'text-strikethrough': grocery.completed
-          }">{{ grocery.name }}</q-item-label>
+          <q-item-label
+            :class="{
+              'text-strikethrough': grocery.completed,
+            }"
+            >{{ grocery.name }}</q-item-label
+          >
         </q-item-section>
       </q-item>
     </q-list>
@@ -23,31 +26,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data () {
-    return {
-      groceries: [
-        {
-          id: 1,
-          name: 'Apples',
-          completed: false
-        },
-        {
-          id: 2,
-          name: 'Oranges',
-          completed: false
-        },
-        {
-          id: 3,
-          name: 'Butter',
-          completed: false
-        }
-      ]
-    }
+  computed: {
+    ...mapGetters('groceries', ['groceries'])
   }
 }
 </script>
 
 <style>
-
 </style>
