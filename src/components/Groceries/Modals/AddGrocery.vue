@@ -10,11 +10,14 @@
       <div class="row">
         <q-card-section class="q-pt-none col">
           <q-input
+            clearable
+            autofocus
             outlined
             v-model="grocery.name"
             label="Item name"
             :rules="[(val) => !!val || 'Field is required']"
-          />
+          >
+          </q-input>
         </q-card-section>
       </div>
 

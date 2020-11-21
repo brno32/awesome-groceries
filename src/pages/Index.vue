@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list bordered separator>
+    <q-list bordered separator v-if="Object.keys(groceries).length > 0">
       <grocery
         v-for="(grocery, key) in groceries"
         :key="key"
