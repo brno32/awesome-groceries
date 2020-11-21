@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const state = {
   groceries: {
     1: {
@@ -18,12 +20,18 @@ const state = {
 const mutations = {
   updateGrocery: (state, payload) => {
     Object.assign(state.groceries[payload.id], payload.updates)
+  },
+  deleteGrocery: (state, id) => {
+    Vue.delete(state.groceries, id)
   }
 }
 
 const actions = {
   updateGrocery: ({ commit }, payload) => {
     commit('updateGrocery', payload)
+  },
+  deleteGrocery: ({ commit }, id) => {
+    commit('deleteGrocery', id)
   }
 }
 
