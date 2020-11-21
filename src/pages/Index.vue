@@ -2,8 +2,8 @@
   <q-page class="q-pa-md">
     <q-list bordered separator>
       <q-item
-        v-for="grocery in groceries"
-        :key="grocery.id"
+        v-for="(grocery, key) in groceries"
+        :key="key"
         clickable
         @click="grocery.completed = !grocery.completed"
         :class="grocery.completed ? 'bg-green-1' : 'bg-orange-1'"

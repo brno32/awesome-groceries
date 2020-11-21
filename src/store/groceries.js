@@ -1,22 +1,18 @@
 const state = {
-  groceries: [
-    {
-      id: 1,
+  groceries: {
+    1: {
       name: 'Apples',
       completed: false
     },
-    {
-      id: 2,
+    2: {
       name: 'Oranges',
       completed: false
     },
-    {
-      id: 3,
+    3: {
       name: 'Butter',
       completed: false
     }
-  ]
-
+  }
 }
 
 const mutations = {
