@@ -3,6 +3,7 @@
     clickable
     :to="link"
     exact
+    class="text-grey-4"
   >
     <q-item-section
       v-if="icon"
@@ -19,7 +20,7 @@
 
 <script>
 export default {
-  name: 'EssentialLink',
+  name: 'NavLink',
   props: {
     title: {
       type: String,
@@ -38,3 +39,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .q-drawer {
+    .q-router-link--exact-active {
+      color: white !important;
+    }
+  }
+</style>
