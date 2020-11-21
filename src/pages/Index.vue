@@ -1,26 +1,13 @@
 <template>
   <q-page class="q-pa-md">
     <q-list bordered separator>
-      <q-item
+      <grocery
         v-for="(grocery, key) in groceries"
         :key="key"
-        clickable
-        @click="grocery.completed = !grocery.completed"
-        :class="grocery.completed ? 'bg-green-1' : 'bg-orange-1'"
+        :grocery="grocery"
+        :id="key"
       >
-        <q-item-section side top>
-          <q-checkbox v-model="grocery.completed" />
-        </q-item-section>
-
-        <q-item-section>
-          <q-item-label
-            :class="{
-              'text-strikethrough': grocery.completed,
-            }"
-            >{{ grocery.name }}</q-item-label
-          >
-        </q-item-section>
-      </q-item>
+      </grocery>
     </q-list>
   </q-page>
 </template>
@@ -31,6 +18,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('groceries', ['groceries'])
+  },
+  components: {
+    grocery: require('../components/Groceries/Grocery').default
   }
 }
 </script>
