@@ -16,11 +16,15 @@ const state = {
 }
 
 const mutations = {
-
+  updateGrocery: (state, payload) => {
+    Object.assign(state.groceries[payload.id], payload.updates)
+  }
 }
 
 const actions = {
-
+  updateGrocery: ({ commit }, payload) => {
+    commit('updateGrocery', payload)
+  }
 }
 
 const getters = {

@@ -1,11 +1,11 @@
 <template>
   <q-item
     clickable
-    @click="grocery.completed = !grocery.completed"
+    @click="updateGrocery({ id, updates: { completed: !grocery.completed } })"
     :class="grocery.completed ? 'bg-green-1' : 'bg-orange-1'"
   >
     <q-item-section side top>
-      <q-checkbox v-model="grocery.completed" />
+      <q-checkbox :value="grocery.completed" class="no-pointer-events" />
     </q-item-section>
 
     <q-item-section>
@@ -20,8 +20,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  props: ['grocery', 'id']
+  props: ['grocery', 'id'],
+  methods: {
+    ...mapActions('groceries', ['updateGrocery'])
+  }
 }
 </script>
 
