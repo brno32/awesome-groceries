@@ -1,11 +1,6 @@
 <template>
   <q-card>
-    <q-card-section class="row">
-      <div class="text-h6">Add Item</div>
-      <q-space></q-space>
-      <q-btn flat rounded dense icon="close" v-close-popup />
-    </q-card-section>
-
+    <modal-header>Add Task</modal-header>
     <q-form @submit.prevent="submitForm">
       <div class="row">
         <q-card-section class="q-pt-none col">
@@ -46,6 +41,10 @@ export default {
       this.addGrocery(this.grocery)
       this.$emit('close')
     }
+  },
+  components: {
+    'modal-header': require('components/Groceries/Modals/Shared/ModalHeader.vue')
+      .default
   }
 }
 </script>
