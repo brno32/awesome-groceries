@@ -2,20 +2,9 @@
   <q-card>
     <modal-header>Add Task</modal-header>
     <q-form @submit.prevent="submitForm">
-      <div class="row">
-        <q-card-section class="q-pt-none col">
-          <q-input
-            clearable
-            autofocus
-            outlined
-            v-model="grocery.name"
-            label="Item name"
-            :rules="[(val) => !!val || 'Field is required']"
-          >
-          </q-input>
-        </q-card-section>
-      </div>
-
+      <q-card-section>
+        <modal-grocery-name :name.sync="grocery.name"></modal-grocery-name>
+      </q-card-section>
       <q-card-actions align="right">
         <q-btn flat label="Save" color="primary" type="submit" />
       </q-card-actions>
@@ -44,6 +33,8 @@ export default {
   },
   components: {
     'modal-header': require('components/Groceries/Modals/Shared/ModalHeader.vue')
+      .default,
+    'modal-grocery-name': require('components/Groceries/Modals/Shared/ModalGroceryName.vue')
       .default
   }
 }
