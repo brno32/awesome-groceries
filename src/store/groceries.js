@@ -56,12 +56,12 @@ const actions = {
 
 const getters = {
   groceriesFiltered: (state, getters) => {
-    const tasksSorted = getters.tasksSorted
+    const groceriesSorted = getters.groceriesSorted
     const groceries = {}
 
     if (state.search) {
-      Object.keys(tasksSorted).forEach((key) => {
-        const grocery = tasksSorted[key]
+      Object.keys(groceriesSorted).forEach((key) => {
+        const grocery = groceriesSorted[key]
 
         if (grocery.name.toLowerCase().includes(state.search.toLowerCase())) {
           groceries[key] = grocery
@@ -70,7 +70,7 @@ const getters = {
 
       return groceries
     } else {
-      return tasksSorted
+      return groceriesSorted
     }
   },
   groceriesToBuy: (state, getters) => {
@@ -95,8 +95,8 @@ const getters = {
     })
     return groceries
   },
-  tasksSorted: (state) => {
-    const tasksSorted = {}
+  groceriesSorted: (state) => {
+    const groceriesSorted = {}
     const keysOrdered = Object.keys(state.groceries)
 
     keysOrdered.sort((a, b) => {
@@ -113,10 +113,10 @@ const getters = {
     })
 
     keysOrdered.forEach((key) => {
-      tasksSorted[key] = state.groceries[key]
+      groceriesSorted[key] = state.groceries[key]
     })
 
-    return tasksSorted
+    return groceriesSorted
   }
 }
 
