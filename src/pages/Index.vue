@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   data () {
-    return { showAddGrocery: !false }
+    return { showAddGrocery: false }
   },
   computed: {
     ...mapGetters('groceries', ['groceries'])

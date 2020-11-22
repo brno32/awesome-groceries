@@ -3,10 +3,10 @@ import { uid } from 'quasar'
 
 const state = {
   groceries: {
-    // 1: {
-    //   name: 'Apples',
-    //   completed: false
-    // }
+    1: {
+      name: 'Apples',
+      completed: false
+    }
   }
 }
 

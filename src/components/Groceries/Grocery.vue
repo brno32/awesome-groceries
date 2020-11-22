@@ -18,15 +18,33 @@
     </q-item-section>
 
     <q-item-section side>
-      <q-btn
-        @click.stop="promptToDelete(id)"
-        flat
-        round
-        dense
-        color="red"
-        icon="delete"
-      />
+      <div class="row">
+        <q-btn
+          @click.stop="showEditGrocery = true"
+          flat
+          round
+          dense
+          color="primary"
+          icon="edit"
+        />
+        <q-btn
+          @click.stop="promptToDelete(id)"
+          flat
+          round
+          dense
+          color="red"
+          icon="delete"
+        />
+      </div>
     </q-item-section>
+
+    <q-dialog v-model="showEditGrocery">
+      <edit-grocery
+        @close="showEditGrocery = false"
+        :grocery="grocery"
+        :id="id"
+      ></edit-grocery>
+    </q-dialog>
   </q-item>
 </template>
 
@@ -35,6 +53,9 @@ import { mapActions } from 'vuex'
 
 export default {
   props: ['grocery', 'id'],
+  data () {
+    return { showEditGrocery: false }
+  },
   methods: {
     ...mapActions('groceries', ['updateGrocery', 'deleteGrocery']),
     promptToDelete (id) {
@@ -49,6 +70,10 @@ export default {
           this.deleteGrocery(id)
         })
     }
+  },
+  components: {
+    'edit-grocery': require('components/Groceries/Modals/EditGrocery.vue')
+      .default
   }
 }
 </script>

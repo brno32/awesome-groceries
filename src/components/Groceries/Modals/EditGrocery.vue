@@ -1,9 +1,11 @@
 <template>
   <q-card>
-    <modal-header>Add Item</modal-header>
+    <modal-header>Edit Item</modal-header>
     <q-form @submit.prevent="submitForm">
       <q-card-section>
-        <modal-grocery-name :name.sync="grocery.name"></modal-grocery-name>
+        <modal-grocery-name
+          :name.sync="groceryToEdit.name"
+        ></modal-grocery-name>
       </q-card-section>
       <modal-buttons></modal-buttons>
     </q-form>
@@ -14,18 +16,22 @@
 import { mapActions } from 'vuex'
 
 export default {
+  props: ['grocery', 'id'],
   data () {
     return {
-      grocery: {
+      groceryToEdit: {
         name: '',
         completed: false
       }
     }
   },
   methods: {
-    ...mapActions('groceries', ['addGrocery']),
+    ...mapActions('groceries', ['updateGrocery']),
     submitForm () {
-      this.addGrocery(this.grocery)
+      this.updateGrocery({
+        id: this.id,
+        updates: this.groceryToEdit
+      })
       this.$emit('close')
     }
   },
@@ -36,6 +42,9 @@ export default {
       .default,
     'modal-buttons': require('components/Groceries/Modals/Shared/ModalButtons.vue')
       .default
+  },
+  mounted () {
+    Object.assign(this.groceryToEdit, this.grocery)
   }
 }
 </script>
