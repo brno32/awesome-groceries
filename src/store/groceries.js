@@ -6,6 +6,14 @@ const state = {
     1: {
       name: 'Apples',
       completed: false
+    },
+    3: {
+      name: 'Grapes',
+      completed: false
+    },
+    2: {
+      name: 'Bananas',
+      completed: false
     }
   },
   search: ''
@@ -47,12 +55,13 @@ const actions = {
 }
 
 const getters = {
-  groceriesFiltered: (state) => {
+  groceriesFiltered: (state, getters) => {
+    const tasksSorted = getters.tasksSorted
     const groceries = {}
 
     if (state.search) {
-      Object.keys(state.groceries).forEach((key) => {
-        const grocery = state.groceries[key]
+      Object.keys(tasksSorted).forEach((key) => {
+        const grocery = tasksSorted[key]
 
         if (grocery.name.toLowerCase().includes(state.search.toLowerCase())) {
           groceries[key] = grocery
@@ -61,7 +70,7 @@ const getters = {
 
       return groceries
     } else {
-      return state.groceries
+      return tasksSorted
     }
   },
   groceriesToBuy: (state, getters) => {
@@ -85,6 +94,29 @@ const getters = {
       }
     })
     return groceries
+  },
+  tasksSorted: (state) => {
+    const tasksSorted = {}
+    const keysOrdered = Object.keys(state.groceries)
+
+    keysOrdered.sort((a, b) => {
+      const aProp = state.groceries[a].name.toLowerCase()
+      const bProp = state.groceries[b].name.toLowerCase()
+
+      if (aProp > bProp) {
+        return 1
+      } else if (aProp < bProp) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+
+    keysOrdered.forEach((key) => {
+      tasksSorted[key] = state.groceries[key]
+    })
+
+    return tasksSorted
   }
 }
 
