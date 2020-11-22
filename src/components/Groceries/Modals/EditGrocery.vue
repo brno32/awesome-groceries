@@ -43,7 +43,7 @@ export default {
     'modal-buttons': require('components/Groceries/Modals/Shared/ModalButtons.vue')
       .default
   },
-  mounted () {
+  created () {
     Object.assign(this.groceryToEdit, this.grocery)
   }
 }

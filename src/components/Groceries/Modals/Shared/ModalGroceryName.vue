@@ -1,6 +1,7 @@
 <template>
   <div class="row q-mb-sm">
     <q-input
+      v-select-all
       clearable
       autofocus
       outlined
@@ -15,6 +16,20 @@
 
 <script>
 export default {
-  props: ['name']
+  props: ['name'],
+  directives: {
+    selectAll: {
+      bind (el) {
+        const input = el.querySelector('.q-field__native')
+
+        input.addEventListener('focus', () => {
+          console.log(input)
+          if (input.value.length > 0) {
+            input.select()
+          }
+        })
+      }
+    }
+  }
 }
 </script>
