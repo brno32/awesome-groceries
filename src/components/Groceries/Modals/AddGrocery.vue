@@ -5,9 +5,7 @@
       <q-card-section>
         <modal-grocery-name :name.sync="grocery.name"></modal-grocery-name>
       </q-card-section>
-      <q-card-actions align="right">
-        <q-btn flat label="Save" color="primary" type="submit" />
-      </q-card-actions>
+      <modal-buttons></modal-buttons>
     </q-form>
   </q-card>
 </template>
@@ -35,6 +33,8 @@ export default {
     'modal-header': require('components/Groceries/Modals/Shared/ModalHeader.vue')
       .default,
     'modal-grocery-name': require('components/Groceries/Modals/Shared/ModalGroceryName.vue')
+      .default,
+    'modal-buttons': require('components/Groceries/Modals/Shared/ModalButtons.vue')
       .default
   }
 }
