@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <list-header>Bought</list-header>
-    <q-list bordered separator v-if="Object.keys(groceriesBought).length > 0">
+  <div class="q-mt-lg">
+    <list-header bgColor="bg-green-4">Bought</list-header>
+    <q-list bordered separator>
       <grocery
         v-for="(grocery, key) in groceriesBought"
         :key="key"

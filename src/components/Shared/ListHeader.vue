@@ -1,11 +1,11 @@
 <template>
-  <q-banner dense class="text-white bg-orange-4 text-center"
+  <q-banner dense class="text-white text-center" :class="bgColor"
     ><span class="text-bold text-subtitle-1"><slot></slot></span
   ></q-banner>
 </template>
 
 <script>
-export default {}
+export default { props: ['bgColor'] }
 </script>
 
 <style>
