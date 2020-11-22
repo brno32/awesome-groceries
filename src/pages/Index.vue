@@ -1,9 +1,25 @@
 <template>
   <q-page class="q-pa-md">
-    <no-groceries v-if="Object.keys(groceriesToBuy).length < 1"></no-groceries>
+    <div class="row q-mb-lg">
+      <search></search>
+    </div>
+
+    <p
+      v-if="
+        !!search &&
+        Object.keys(groceriesToBuy).length < 1 &&
+        Object.keys(groceriesBought).length < 1
+      "
+    >
+      No search results
+    </p>
+
+    <no-groceries
+      v-if="Object.keys(groceriesToBuy).length < 1 && !search"
+    ></no-groceries>
     <groceries-to-buy
       :groceriesToBuy="groceriesToBuy"
-      v-else
+      v-if="Object.keys(groceriesToBuy).length > 0"
     ></groceries-to-buy>
     <groceries-bought
       :groceriesBought="groceriesBought"
@@ -27,14 +43,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   data () {
     return { showAddGrocery: false }
   },
   computed: {
-    ...mapGetters('groceries', ['groceriesToBuy', 'groceriesBought'])
+    ...mapGetters('groceries', ['groceriesToBuy', 'groceriesBought']),
+    ...mapState('groceries', ['search'])
   },
   components: {
     'add-task': require('components/Groceries/Modals/AddGrocery').default,
@@ -42,7 +59,8 @@ export default {
       .default,
     'groceries-bought': require('components/Groceries/GroceriesBought.vue')
       .default,
-    'no-groceries': require('components/Groceries/NoGroceries').default
+    'no-groceries': require('components/Groceries/NoGroceries').default,
+    search: require('components/Groceries/Tools/Search.vue').default
   },
   mounted () {
     this.$root.$on('show-add-item', () => {

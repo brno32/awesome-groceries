@@ -7,7 +7,8 @@ const state = {
       name: 'Apples',
       completed: false
     }
-  }
+  },
+  search: ''
 }
 
 const mutations = {
@@ -19,6 +20,9 @@ const mutations = {
   },
   addGrocery: (state, payload) => {
     Vue.set(state.groceries, payload.id, payload.grocery)
+  },
+  setSearch (state, value) {
+    state.search = value
   }
 }
 
@@ -36,24 +40,46 @@ const actions = {
       grocery
     }
     commit('addGrocery', payload)
+  },
+  setSearch: ({ commit }, value) => {
+    commit('setSearch', value)
   }
 }
 
 const getters = {
-  groceriesToBuy: (state) => {
+  groceriesFiltered: (state) => {
     const groceries = {}
-    Object.keys(state.groceries).forEach((key) => {
-      const grocery = state.groceries[key]
+
+    if (state.search) {
+      Object.keys(state.groceries).forEach((key) => {
+        const grocery = state.groceries[key]
+
+        if (grocery.name.toLowerCase().includes(state.search.toLowerCase())) {
+          groceries[key] = grocery
+        }
+      })
+
+      return groceries
+    } else {
+      return state.groceries
+    }
+  },
+  groceriesToBuy: (state, getters) => {
+    const groceriesFiltered = getters.groceriesFiltered
+    const groceries = {}
+    Object.keys(groceriesFiltered).forEach((key) => {
+      const grocery = groceriesFiltered[key]
       if (!grocery.completed) {
         groceries[key] = grocery
       }
     })
     return groceries
   },
-  groceriesBought: (state) => {
+  groceriesBought: (state, getters) => {
+    const groceriesFiltered = getters.groceriesFiltered
     const groceries = {}
-    Object.keys(state.groceries).forEach((key) => {
-      const grocery = state.groceries[key]
+    Object.keys(groceriesFiltered).forEach((key) => {
+      const grocery = groceriesFiltered[key]
       if (grocery.completed) {
         groceries[key] = grocery
       }
