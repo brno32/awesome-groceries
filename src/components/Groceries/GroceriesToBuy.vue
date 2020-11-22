@@ -1,16 +1,22 @@
 <template>
-  <div>
-    <list-header bgColor="bg-orange-4">To Buy</list-header>
-    <q-list bordered separator>
-      <grocery
-        v-for="(grocery, key) in groceriesToBuy"
-        :key="key"
-        :grocery="grocery"
-        :id="key"
-      >
-      </grocery>
-    </q-list>
-  </div>
+  <transition
+    appear
+    enter-active-class="animated zoomIn"
+    leave-active-class="animated zoomOut absolute-top"
+  >
+    <div>
+      <list-header bgColor="bg-orange-4">To Buy</list-header>
+      <q-list bordered separator>
+        <grocery
+          v-for="(grocery, key) in groceriesToBuy"
+          :key="key"
+          :grocery="grocery"
+          :id="key"
+        >
+        </grocery>
+      </q-list>
+    </div>
+  </transition>
 </template>
 
 <script>

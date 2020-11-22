@@ -14,17 +14,19 @@
       No search results
     </p>
 
-    <no-groceries
-      v-if="Object.keys(groceriesToBuy).length < 1 && !search"
-    ></no-groceries>
-    <groceries-to-buy
-      :groceriesToBuy="groceriesToBuy"
-      v-if="Object.keys(groceriesToBuy).length > 0"
-    ></groceries-to-buy>
-    <groceries-bought
-      :groceriesBought="groceriesBought"
-      v-if="Object.keys(groceriesBought).length > 0"
-    ></groceries-bought>
+    <div class="relative-position">
+      <no-groceries
+        v-if="Object.keys(groceriesToBuy).length < 1 && !search"
+      ></no-groceries>
+      <groceries-to-buy
+        :groceriesToBuy="groceriesToBuy"
+        v-if="Object.keys(groceriesToBuy).length > 0"
+      ></groceries-to-buy>
+      <groceries-bought
+        :groceriesBought="groceriesBought"
+        v-if="Object.keys(groceriesBought).length > 0"
+      ></groceries-bought>
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
