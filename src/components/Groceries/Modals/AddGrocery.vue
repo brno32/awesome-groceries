@@ -12,8 +12,10 @@
 
 <script>
 import { mapActions } from 'vuex'
+import mixinAddEditGroceryMixin from 'src/mixins/mixin-add-edit-grocery'
 
 export default {
+  mixins: [mixinAddEditGroceryMixin],
   data () {
     return {
       grocery: {
@@ -28,14 +30,6 @@ export default {
       this.addGrocery(this.grocery)
       this.$emit('close')
     }
-  },
-  components: {
-    'modal-header': require('components/Groceries/Modals/Shared/ModalHeader.vue')
-      .default,
-    'modal-grocery-name': require('components/Groceries/Modals/Shared/ModalGroceryName.vue')
-      .default,
-    'modal-buttons': require('components/Groceries/Modals/Shared/ModalButtons.vue')
-      .default
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
   <q-item
+    v-touch-hold:500.mouse="showEditGroceryModal"
     clickable
     @click="updateGrocery({ id, updates: { completed: !grocery.completed } })"
     :class="grocery.completed ? 'bg-green-1' : 'bg-orange-1'"
@@ -69,6 +70,9 @@ export default {
         .onOk(() => {
           this.deleteGrocery(id)
         })
+    },
+    showEditGroceryModal () {
+      this.showEditGrocery = true
     }
   },
   components: {
