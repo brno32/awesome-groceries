@@ -1,14 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list bordered separator v-if="Object.keys(groceries).length > 0">
-      <grocery
-        v-for="(grocery, key) in groceries"
-        :key="key"
-        :grocery="grocery"
-        :id="key"
-      >
-      </grocery>
-    </q-list>
+    <groceries-to-buy :groceriesToBuy="groceriesToBuy"></groceries-to-buy>
+    <hr />
+
+    <groceries-bought :groceriesBought="groceriesBought"></groceries-bought>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -34,11 +29,14 @@ export default {
     return { showAddGrocery: false }
   },
   computed: {
-    ...mapGetters('groceries', ['groceries'])
+    ...mapGetters('groceries', ['groceriesToBuy', 'groceriesBought'])
   },
   components: {
-    grocery: require('../components/Groceries/Grocery').default,
-    'add-task': require('../components/Groceries/Modals/AddGrocery').default
+    'add-task': require('components/Groceries/Modals/AddGrocery').default,
+    'groceries-to-buy': require('components/Groceries/GroceriesToBuy.vue')
+      .default,
+    'groceries-bought': require('components/Groceries/GroceriesBought.vue')
+      .default
   }
 }
 </script>

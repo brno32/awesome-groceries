@@ -40,8 +40,25 @@ const actions = {
 }
 
 const getters = {
-  groceries: (state) => {
-    return state.groceries
+  groceriesToBuy: (state) => {
+    const groceries = {}
+    Object.keys(state.groceries).forEach((key) => {
+      const grocery = state.groceries[key]
+      if (!grocery.completed) {
+        groceries[key] = grocery
+      }
+    })
+    return groceries
+  },
+  groceriesBought: (state) => {
+    const groceries = {}
+    Object.keys(state.groceries).forEach((key) => {
+      const grocery = state.groceries[key]
+      if (grocery.completed) {
+        groceries[key] = grocery
+      }
+    })
+    return groceries
   }
 }
 
