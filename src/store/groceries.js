@@ -14,42 +14,6 @@ const state = {
     b: {
       name: 'Bananas',
       completed: false
-    },
-    d: {
-      name: 'Cherries',
-      completed: false
-    },
-    e: {
-      name: 'Eggs',
-      completed: false
-    },
-    f: {
-      name: 'Bread',
-      completed: false
-    },
-    g: {
-      name: 'Cheese',
-      completed: false
-    },
-    h: {
-      name: 'Milk',
-      completed: false
-    },
-    i: {
-      name: 'Oatmeal',
-      completed: false
-    },
-    j: {
-      name: 'Cheese',
-      completed: false
-    },
-    k: {
-      name: 'Milk',
-      completed: false
-    },
-    l: {
-      name: 'Oatmeal',
-      completed: false
     }
   },
   search: ''
