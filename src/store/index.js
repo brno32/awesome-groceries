@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // we first import the module
 import groceries from './groceries'
+import settings from './settings'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       // then we reference it
-      groceries
+      groceries, settings
     },
 
     // enable strict mode (adds overhead!)
@@ -26,7 +27,7 @@ export default function (/* { ssrContext } */) {
   */
 
   if (process.env.DEV && module.hot) {
-    module.hot.accept(['./groceries'], () => {
+    module.hot.accept(['./groceries', './settings'], () => {
       const newShowcase = require('./groceries').default
       Store.hotUpdate({ modules: { showcase: newShowcase } })
     })

@@ -16,9 +16,22 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  data () {
-    return { isDarkMode: true }
+  computed: {
+    ...mapGetters('settings', ['settings']),
+    isDarkMode: {
+      get () {
+        return this.settings.darkMode
+      },
+      set (value) {
+        this.setDarkMode(value)
+      }
+    }
+  },
+  methods: {
+    ...mapActions('settings', ['setDarkMode'])
   }
 }
 </script>
