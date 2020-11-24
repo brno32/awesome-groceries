@@ -27,6 +27,7 @@ export default {
       },
       set (value) {
         this.setDarkMode(value)
+        this.$q.dark.set(value)
       }
     }
   },

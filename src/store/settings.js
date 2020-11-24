@@ -9,6 +9,9 @@ const state = {
 const mutations = {
   setDarkMode (state, value) {
     state.settings.darkMode = value
+  },
+  setSettings (state, settings) {
+    Object.assign(state.settings, settings)
   }
 }
 
@@ -19,6 +22,13 @@ const actions = {
   },
   saveSettings ({ state }) {
     LocalStorage.set('settings', state.settings)
+  },
+  retrieveSettings ({ commit }) {
+    const settings = LocalStorage.getItem('settings')
+
+    if (settings) {
+      commit('setSettings', settings)
+    }
   }
 }
 
