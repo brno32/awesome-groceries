@@ -5,7 +5,9 @@
     leave-active-class="animated zoomOut absolute-top"
   >
     <div>
-      <list-header bgColor="bg-orange-4">To Buy</list-header>
+      <list-header :bgColor="$q.dark.isActive ? 'bg-orange-10' : 'bg-orange-4'"
+        >To Buy</list-header
+      >
       <q-list bordered separator>
         <grocery
           v-for="(grocery, key) in groceriesToBuy"

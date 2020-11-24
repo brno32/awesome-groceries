@@ -3,7 +3,15 @@
     v-touch-hold:500.mouse="showEditGroceryModal"
     clickable
     @click="updateGrocery({ id, updates: { completed: !grocery.completed } })"
-    :class="grocery.completed ? 'bg-green-1' : 'bg-orange-1'"
+    :class="
+      grocery.completed
+        ? $q.dark.isActive
+          ? 'bg-green-6'
+          : 'bg-green-1'
+        : $q.dark.isActive
+        ? 'bg-orange-6'
+        : 'bg-orange-1'
+    "
   >
     <q-item-section side top>
       <q-checkbox :value="grocery.completed" class="no-pointer-events" />
