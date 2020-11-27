@@ -17,6 +17,7 @@
         stack-label
         :rules="[(val) => isValidEmail(val) || 'Please enter a valid email']"
         lazy-rules
+        ref="email"
       />
     </div>
     <div class="row q-mb-md">
@@ -31,6 +32,7 @@
           (val) => val.length >= 6 || 'Please use at least 6 characters',
         ]"
         lazy-rules
+        ref="password"
       />
     </div>
     <div class="row">
@@ -46,7 +48,14 @@ export default {
     return { formData: { email: '', password: '' } }
   },
   methods: {
-    submitForm () {},
+    submitForm () {
+      this.$refs.email.validate()
+      this.$refs.password.validate()
+
+      if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
+        console.log('register user')
+      }
+    },
     isValidEmail (email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
