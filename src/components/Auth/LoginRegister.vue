@@ -5,7 +5,7 @@
         <template v-slot:avatar>
           <q-icon name="account_circle" color="primary" />
         </template>
-        Register to access your groceries anywhere!
+        {{ tab | titleCase }} to access your groceries anywhere!
       </q-banner>
     </div>
     <div class="row q-mb-md">
@@ -37,13 +37,14 @@
     </div>
     <div class="row">
       <q-space />
-      <q-btn color="primary" label="Register" type="submit" />
+      <q-btn color="primary" :label="tab" type="submit" />
     </div>
   </form>
 </template>
 
 <script>
 export default {
+  props: ['tab'],
   data () {
     return { formData: { email: '', password: '' } }
   },
@@ -53,12 +54,21 @@ export default {
       this.$refs.password.validate()
 
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
-        console.log('register user')
+        if (this.tab === 'login') {
+          console.log('login user')
+        } else {
+          console.log('register user')
+        }
       }
     },
     isValidEmail (email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
+    }
+  },
+  filters: {
+    titleCase (value) {
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   }
 }
