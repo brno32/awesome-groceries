@@ -5,6 +5,14 @@
         <q-toolbar-title class="absolute-center">
           Awesome Groceries
         </q-toolbar-title>
+
+        <q-btn
+          to="/auth"
+          flat
+          icon-right="account_circle"
+          label="Login"
+          class="absolute-right"
+        />
       </q-toolbar>
     </q-header>
 
@@ -29,16 +37,8 @@
       content-class="bg-primary"
     >
       <q-list dark>
-        <q-item-label
-          header
-        >
-          Navigation
-        </q-item-label>
-        <NavLink
-          v-for="link in navLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item-label header> Navigation </q-item-label>
+        <NavLink v-for="link in navLinks" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
 

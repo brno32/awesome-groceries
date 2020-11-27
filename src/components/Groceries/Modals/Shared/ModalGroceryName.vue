@@ -3,12 +3,12 @@
     <q-input
       v-select-all
       clearable
-      autofocus
       outlined
       @input="$emit('update:name', $event)"
       :value="name"
       label="Item name"
       :rules="[(val) => !!val || 'Field is required']"
+      lazy-rules
     >
     </q-input>
   </div>
