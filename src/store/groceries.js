@@ -67,6 +67,21 @@ const actions = {
 
       commit('addGrocery', payload)
     })
+
+    userGroceries.on('child_changed', snapshot => {
+      const grocery = snapshot.val()
+
+      const payload = {
+        id: snapshot.key,
+        updates: grocery
+      }
+
+      commit('updateGrocery', payload)
+    })
+
+    userGroceries.on('child_removed', snapshot => {
+      commit('deleteGrocery', snapshot.key)
+    })
   }
 }
 
