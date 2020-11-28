@@ -4,6 +4,7 @@ import firebase from 'firebase/app'
 
 // Add the Firebase services that you want to use
 import 'firebase/auth'
+import 'firebase/database'
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -18,5 +19,6 @@ var firebaseConfig = {
 // Initialize Firebase
 var firebaseApp = firebase.initializeApp(firebaseConfig)
 var firebaseAuth = firebaseApp.auth()
+var firebaseDb = firebaseApp.database()
 
-export { firebaseAuth }
+export { firebaseAuth, firebaseDb }

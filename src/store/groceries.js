@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
+import { firebaseDb, firebaseAuth } from 'boot/firebase'
 
 const state = {
   groceries: {
-    a: {
-      name: 'Apples',
-      completed: false
-    },
-    c: {
-      name: 'Grapes',
-      completed: false
-    },
-    b: {
-      name: 'Bananas',
-      completed: false
-    }
+    // a: {
+    //   name: 'Apples',
+    //   completed: false
+    // },
+    // c: {
+    //   name: 'Grapes',
+    //   completed: false
+    // },
+    // b: {
+    //   name: 'Bananas',
+    //   completed: false
+    // }
   },
   search: ''
 }
@@ -51,6 +52,21 @@ const actions = {
   },
   setSearch: ({ commit }, value) => {
     commit('setSearch', value)
+  },
+  fbReadData: ({ commit }, value) => {
+    const userId = firebaseAuth.currentUser.uid
+    const userGroceries = firebaseDb.ref('groceries/' + userId)
+
+    userGroceries.on('child_added', snapshot => {
+      const grocery = snapshot.val()
+
+      const payload = {
+        id: snapshot.key,
+        grocery: grocery
+      }
+
+      commit('addGrocery', payload)
+    })
   }
 }
 

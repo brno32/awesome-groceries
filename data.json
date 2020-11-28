@@ -1,0 +1,18 @@
+{
+  "groceries": {
+    "8mWAQ24bwBO8xLCsTyXFxGvEYxm2": {
+      "ID1": {
+        "name": "Apples",
+        "completed": false
+      },
+      "ID2": {
+        "name": "Grapes",
+        "completed": false
+      },
+      "ID3": {
+        "name": "Bananas",
+        "completed": false
+      }
+    }
+  }
+}
