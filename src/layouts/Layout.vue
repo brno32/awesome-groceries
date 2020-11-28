@@ -7,10 +7,19 @@
         </q-toolbar-title>
 
         <q-btn
+          v-if="!loggedIn"
           to="/auth"
           flat
           icon-right="account_circle"
           label="Login"
+          class="absolute-right"
+        />
+
+        <q-btn
+          v-else
+          flat
+          icon-right="account_circle"
+          label="Logout"
           class="absolute-right"
         />
       </q-toolbar>
@@ -50,6 +59,7 @@
 
 <script>
 import NavLink from 'components/NavLink.vue'
+import { mapState } from 'vuex'
 
 const linksData = [
   {
@@ -72,6 +82,9 @@ export default {
       leftDrawerOpen: false,
       navLinks: linksData
     }
+  },
+  computed: {
+    ...mapState('auth', ['loggedIn'])
   }
 }
 </script>

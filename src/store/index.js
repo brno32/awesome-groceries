@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 // we first import the module
 import groceries from './groceries'
 import settings from './settings'
+import auth from './auth'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       // then we reference it
-      groceries, settings
+      groceries, settings, auth
     },
 
     // enable strict mode (adds overhead!)

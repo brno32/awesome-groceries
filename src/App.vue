@@ -8,10 +8,14 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Awe',
-  methods: { ...mapActions('settings', ['retrieveSettings']) },
+  methods: {
+    ...mapActions('settings', ['retrieveSettings']),
+    ...mapActions('auth', ['handleAuthStateChange'])
+  },
   computed: { ...mapGetters('settings', ['settings']) },
   mounted () {
     this.retrieveSettings()
+    this.handleAuthStateChange()
 
     const settings = this.settings
 
