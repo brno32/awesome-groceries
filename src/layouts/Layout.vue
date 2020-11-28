@@ -17,6 +17,7 @@
 
         <q-btn
           v-else
+          @click="logoutUser"
           flat
           icon-right="account_circle"
           label="Logout"
@@ -59,7 +60,7 @@
 
 <script>
 import NavLink from 'components/NavLink.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 const linksData = [
   {
@@ -85,6 +86,9 @@ export default {
   },
   computed: {
     ...mapState('auth', ['loggedIn'])
+  },
+  methods: {
+    ...mapActions('auth', ['logoutUser'])
   }
 }
 </script>
