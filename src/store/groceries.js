@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
+import { errorMessage } from 'src/functions/show-error-message'
 
 const state = {
   groceries: {
@@ -43,19 +44,19 @@ const mutations = {
 }
 
 const actions = {
-  updateGrocery: ({ commit }, payload) => {
-    commit('updateGrocery', payload)
+  updateGrocery: ({ dispatch }, payload) => {
+    dispatch('fbUpdateGrocery', payload)
   },
-  deleteGrocery: ({ commit }, id) => {
-    commit('deleteGrocery', id)
+  deleteGrocery: ({ dispatch }, id) => {
+    dispatch('fbDeleteGrocery', id)
   },
-  addGrocery: ({ commit }, grocery) => {
+  addGrocery: ({ dispatch }, grocery) => {
     const groceryId = uid()
     const payload = {
       id: groceryId,
       grocery
     }
-    commit('addGrocery', payload)
+    dispatch('fbAddGrocery', payload)
   },
   setSearch: ({ commit }, value) => {
     commit('setSearch', value)
@@ -92,6 +93,33 @@ const actions = {
 
     userGroceries.on('child_removed', snapshot => {
       commit('deleteGrocery', snapshot.key)
+    })
+  },
+  fbAddGrocery: ({ commit }, payload) => {
+    const userId = firebaseAuth.currentUser.uid
+    const groceryRef = firebaseDb.ref('groceries/' + userId + '/' + payload.id)
+    groceryRef.set(payload.grocery, error => {
+      if (error) {
+        errorMessage(error.message)
+      }
+    })
+  },
+  fbUpdateGrocery: ({ commit }, payload) => {
+    const userId = firebaseAuth.currentUser.uid
+    const groceryRef = firebaseDb.ref('groceries/' + userId + '/' + payload.id)
+    groceryRef.update(payload.updates, error => {
+      if (error) {
+        errorMessage(error.message)
+      }
+    })
+  },
+  fbDeleteGrocery: ({ commit }, itemId) => {
+    const userId = firebaseAuth.currentUser.uid
+    const groceryRef = firebaseDb.ref('groceries/' + userId + '/' + itemId)
+    groceryRef.remove(error => {
+      if (error) {
+        errorMessage(error.message)
+      }
     })
   }
 }
