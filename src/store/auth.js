@@ -37,9 +37,10 @@ const actions = {
         dispatch('groceries/fbReadData', null, { root: true })
       } else {
         commit('setLoggedIn', false)
+        commit('groceries/setDownloaded', false, { root: true })
+        commit('groceries/clearGroceries', null, { root: true })
         LocalStorage.set('loggedIn', false)
         this.$router.replace('/auth').catch(err => { console.error(err) })
-        commit('groceries/setDownloaded', false, { root: true })
       }
       Loading.hide()
     })

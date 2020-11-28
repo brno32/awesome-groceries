@@ -31,6 +31,9 @@ const mutations = {
   addGrocery: (state, payload) => {
     Vue.set(state.groceries, payload.id, payload.grocery)
   },
+  clearGroceries: (state) => {
+    Vue.set(state.groceries, {})
+  },
   setSearch (state, value) {
     state.search = value
   },
