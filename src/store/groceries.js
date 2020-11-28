@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
 import { errorMessage } from 'src/functions/show-error-message'
 
@@ -67,6 +67,9 @@ const actions = {
 
     userGroceries.once('value', snapshot => {
       commit('setDownloaded', true)
+    }, error => {
+      errorMessage(error.message)
+      this.$router.replace('/auth')
     })
 
     userGroceries.on('child_added', snapshot => {
@@ -101,6 +104,8 @@ const actions = {
     groceryRef.set(payload.grocery, error => {
       if (error) {
         errorMessage(error.message)
+      } else {
+        Notify.create('Item added!')
       }
     })
   },
@@ -110,6 +115,11 @@ const actions = {
     groceryRef.update(payload.updates, error => {
       if (error) {
         errorMessage(error.message)
+      } else {
+        const keys = Object.keys(payload.updates)
+        if (!(keys.length === 1 && keys.includes('completed'))) {
+          Notify.create('Item updated!')
+        }
       }
     })
   },
@@ -119,6 +129,8 @@ const actions = {
     groceryRef.remove(error => {
       if (error) {
         errorMessage(error.message)
+      } else {
+        Notify.create('Item deleted!')
       }
     })
   }
