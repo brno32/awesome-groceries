@@ -4,20 +4,7 @@ import { firebaseDb, firebaseAuth } from 'boot/firebase'
 import { errorMessage } from 'src/functions/show-error-message'
 
 const state = {
-  groceries: {
-    // a: {
-    //   name: 'Apples',
-    //   completed: false
-    // },
-    // c: {
-    //   name: 'Grapes',
-    //   completed: false
-    // },
-    // b: {
-    //   name: 'Bananas',
-    //   completed: false
-    // }
-  },
+  groceries: {},
   search: '',
   downloaded: false
 }
@@ -33,7 +20,7 @@ const mutations = {
     Vue.set(state.groceries, payload.id, payload.grocery)
   },
   clearGroceries: (state) => {
-    Vue.set(state.groceries, {})
+    state.groceries = {}
   },
   setSearch (state, value) {
     state.search = value
