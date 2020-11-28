@@ -17,7 +17,8 @@ const state = {
     //   completed: false
     // }
   },
-  search: ''
+  search: '',
+  downloaded: false
 }
 
 const mutations = {
@@ -32,6 +33,9 @@ const mutations = {
   },
   setSearch (state, value) {
     state.search = value
+  },
+  setDownloaded (state, value) {
+    state.downloaded = value
   }
 }
 
@@ -56,6 +60,10 @@ const actions = {
   fbReadData: ({ commit }, value) => {
     const userId = firebaseAuth.currentUser.uid
     const userGroceries = firebaseDb.ref('groceries/' + userId)
+
+    userGroceries.once('value', snapshot => {
+      commit('setDownloaded', true)
+    })
 
     userGroceries.on('child_added', snapshot => {
       const grocery = snapshot.val()

@@ -39,6 +39,7 @@ const actions = {
         commit('setLoggedIn', false)
         LocalStorage.set('loggedIn', false)
         this.$router.replace('/auth').catch(err => { console.error(err) })
+        commit('groceries/setDownloaded', false, { root: true })
       }
       Loading.hide()
     })
